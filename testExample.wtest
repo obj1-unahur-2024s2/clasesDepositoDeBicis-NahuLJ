@@ -98,3 +98,42 @@ describe "group of tests for deposito PARTE 2 Y 3" {
 
 }
 
+describe "group of tests for deposito PARTE 4" {
+  //Bicicletas
+  const bici1 = new Bicicleta (rodado = 28, largo = 150, marca = "Olmo", accesorios = [farolito])
+  const bici2 = new Bicicleta (rodado = 26, largo = 110, marca = "Legnano", accesorios = [farolito, canasto1, morral1])
+  const bici3 = new Bicicleta (rodado = 20, largo = 90, marca = "Legnano", accesorios = [morral2])
+  
+  //Accesorios
+  const canasto1 = new Canasto (volumen = 8)
+  const morral1 = new Morral (largo = 21, tieneOjoDeGato = true)
+  const morral2 = new Morral (largo = 6, tieneOjoDeGato = false)
+  
+  //Deposito
+  const deposito = new Deposito (bicicletas = [bici1,bici2,bici3])
+
+
+  test "Ninguna bici es compañera de la bici1" {
+    assert.equals([],deposito.bicisCompanierasDe(bici1))
+  }
+
+  test "Ninguna bici es compañera de la bici2" {
+    assert.equals([],deposito.bicisCompanierasDe(bici2))
+  }
+
+  test "Ninguna bici es compañera de la bici3" {
+    assert.equals([],deposito.bicisCompanierasDe(bici3))
+  }
+
+  test "Si se agrega una bici4 que tenga 140 de largo, y marca Olmo es compañera de la bici1" {
+    const bici4 = new Bicicleta(rodado = 28, largo = 140, marca = "Olmo", accesorios = [farolito])
+    deposito.bicicletas().add(bici4)
+    assert.equals([bici4],deposito.bicisCompanierasDe(bici1))
+  }
+
+  test "Si se agrega una bici4 que tenga 139 de largo, y marca Olmo no es compañera de la bici1" {
+    const bici4 = new Bicicleta(rodado = 28, largo = 139, marca = "Olmo", accesorios = [farolito])
+    deposito.bicicletas().add(bici4)
+    assert.equals([],deposito.bicisCompanierasDe(bici1))
+  }
+}

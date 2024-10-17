@@ -18,4 +18,10 @@ class Deposito{
   method bicisLargas() = bicicletas.filter({bicicleta => bicicleta.largo() > 170})
 
   method cantidadBicisSinAccesorios() = bicicletas.count({bicicleta => bicicleta.accesorios().size() == 0})
+
+  method bicisCompanierasDe(unaBici) =  
+    bicicletas.filter({bicicleta => self.sonCompanieras(unaBici, bicicleta) and unaBici != bicicleta})
+
+  method sonCompanieras(unaBici, otraBici) = 
+    unaBici.marca() == otraBici.marca() and (unaBici.largo() - otraBici.largo()).abs() <= 10
 }
