@@ -1,9 +1,43 @@
-import example.pepita
+import bicicleta.*
+import accesorios.*
 
-describe "group of tests for pepita" {
 
-  test "pepita has initial energy" {
-    assert.equals(100, pepita.energy())
+describe "group of tests for bicicleta" {
+  //Bicicletas
+  const bici1 = new Bicicleta (rodado = 28, largo = 150, marca = "Olmo", accesorios = [farolito])
+  const bici2 = new Bicicleta (rodado = 26, largo = 110, marca = "Legnano", accesorios = [farolito, canasto1, morral1])
+  const bici3 = new Bicicleta (rodado = 20, largo = 90, marca = "Legnano", accesorios = [morral2])
+  
+  //Accesorios
+  const canasto1 = new Canasto (volumen = 8)
+  const morral1 = new Morral (largo = 21, tieneOjoDeGato = true)
+  const morral2 = new Morral (largo = 6, tieneOjoDeGato = false)
+  
+  test "bici1 tiene 85 de altura, 30 de velocidad crucero, 0 de carga, 14.5 de peso, tiene luz y 1 acc liviano" {
+    assert.equals(85, bici1.altura())
+    assert.equals(30, bici1.velocidadCrucero())
+    assert.equals(0, bici1.carga())
+    assert.equals(14.5, bici1.peso())
+    assert.that(bici1.tieneLuz())
+    assert.equals(1, bici1.cantidadDeAccesoriosLivianos())
+  }
+
+  test "bici2 tiene 80 de altura, 28 de velocidad crucero, 23 de carga, 15.5 de peso, tiene luz y 2 acc liviano" {
+    assert.equals(80, bici2.altura())
+    assert.equals(28, bici2.velocidadCrucero())
+    assert.equals(23, bici2.carga())
+    assert.equals(15.5, bici2.peso())
+    assert.that(bici2.tieneLuz())
+    assert.equals(2, bici2.cantidadDeAccesoriosLivianos())
+  }
+
+  test "bici3 tiene 65 de altura, 22 de velocidad crucero, 2 de carga, 11.2 de peso, no tiene luz y 0 acc liviano" {
+    assert.equals(65, bici3.altura())
+    assert.equals(22, bici3.velocidadCrucero())
+    assert.equals(2, bici3.carga())
+    assert.equals(11.2, bici3.peso())
+    assert.notThat(bici3.tieneLuz())
+    assert.equals(0, bici3.cantidadDeAccesoriosLivianos())
   }
 
 }
