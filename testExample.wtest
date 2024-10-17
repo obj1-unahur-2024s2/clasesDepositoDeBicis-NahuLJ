@@ -1,6 +1,6 @@
 import bicicleta.*
 import accesorios.*
-
+import deposito.*
 
 describe "group of tests for bicicleta" {
   //Bicicletas
@@ -38,6 +38,48 @@ describe "group of tests for bicicleta" {
     assert.equals(11.2, bici3.peso())
     assert.notThat(bici3.tieneLuz())
     assert.equals(0, bici3.cantidadDeAccesoriosLivianos())
+  }
+
+}
+
+describe "group of tests for deposito" {
+  //Bicicletas
+  const bici1 = new Bicicleta (rodado = 28, largo = 150, marca = "Olmo", accesorios = [farolito])
+  const bici2 = new Bicicleta (rodado = 26, largo = 110, marca = "Legnano", accesorios = [farolito, canasto1, morral1])
+  const bici3 = new Bicicleta (rodado = 20, largo = 90, marca = "Legnano", accesorios = [morral2])
+  
+  //Accesorios
+  const canasto1 = new Canasto (volumen = 8)
+  const morral1 = new Morral (largo = 21, tieneOjoDeGato = true)
+  const morral2 = new Morral (largo = 6, tieneOjoDeGato = false)
+  
+  //Deposito
+  const deposito = new Deposito (bicicletas = [bici1,bici2,bici3])
+
+  test "las bicis rapidas son la bici1 y bici2" {
+    assert.equals([bici1,bici2],deposito.bicisRapidas())
+  }
+
+  test "las marcas del deposito son Olmo y legnano" {
+    assert.equals(#{"Olmo", "Legnano"},deposito.marcas())
+  }
+
+  test "el deposito no es nocturno por la bici3" {
+    assert.notThat(deposito.esNocturno())
+    assert.notThat(bici3.tieneLuz())
+  }
+
+  test "el deposito tiene una bici que puede llevar 10 kg" {
+    assert.that(deposito.tieneBiciQuePuedaLlevar(10))
+  }
+
+  test "el deposito no tiene una bici que puede llevar 50 kg" {
+    assert.notThat(deposito.tieneBiciQuePuedaLlevar(50))
+  }
+
+  test "Si al deposito le sacamos la bici3 es nocturno" {
+    deposito.bicicletas().remove(bici3)
+    assert.that(deposito.esNocturno())
   }
 
 }
