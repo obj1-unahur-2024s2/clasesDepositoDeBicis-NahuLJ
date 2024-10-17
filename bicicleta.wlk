@@ -1,8 +1,8 @@
 class Bicicleta{
   const rodado 
-  const largo 
+  const property largo 
   const property marca 
-  const accesorios
+  const property accesorios
 
   method altura() = rodado * 2.5 + 15
 

@@ -2,7 +2,7 @@ import bicicleta.*
 import accesorios.*
 import deposito.*
 
-describe "group of tests for bicicleta" {
+describe "group of tests for bicicleta PARTE 1" {
   //Bicicletas
   const bici1 = new Bicicleta (rodado = 28, largo = 150, marca = "Olmo", accesorios = [farolito])
   const bici2 = new Bicicleta (rodado = 26, largo = 110, marca = "Legnano", accesorios = [farolito, canasto1, morral1])
@@ -42,7 +42,7 @@ describe "group of tests for bicicleta" {
 
 }
 
-describe "group of tests for deposito" {
+describe "group of tests for deposito PARTE 2 Y 3" {
   //Bicicletas
   const bici1 = new Bicicleta (rodado = 28, largo = 150, marca = "Olmo", accesorios = [farolito])
   const bici2 = new Bicicleta (rodado = 26, largo = 110, marca = "Legnano", accesorios = [farolito, canasto1, morral1])
@@ -82,4 +82,19 @@ describe "group of tests for deposito" {
     assert.that(deposito.esNocturno())
   }
 
+  //PARTE 3
+  test "La marca de la bici mas rapida es Olmo" {
+    assert.equals("Olmo", deposito.marcaDeLaBiciMasRapida())
+  }
+
+  test "La carga total de las bicis largas es 0, ya que no hay ninguna bici larga" {
+    assert.equals([], deposito.bicisLargas())
+    assert.equals(0, deposito.cargaTotalDeLasBicisLargas())
+  }
+
+  test "La cantidad de bicis sin accesorios es 0" {
+    assert.equals(0, deposito.cantidadBicisSinAccesorios())
+  }
+
 }
+
