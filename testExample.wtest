@@ -185,5 +185,20 @@ describe "group of tests for deposito PARTE 6" {
     assert.equals([bici4,bici6],deposito.bicisCompanierasDe(bici1))
     assert.equals([bici5],deposito.bicisCompanierasDe(bici2))
     assert.equals([bici5],deposito.bicisCompanierasDe(bici3))
+    assert.equals([bici1],deposito.bicisCompanierasDe(bici6))
+  }
+
+  test "si el deposito tiene la bici1, 2, 3 y 4 en ese orden no se hizo la luz"{
+    deposito.bicicletas().add(bici4)
+    assert.notThat(deposito.seHizoLaLuz())
+  }
+
+  test "si el deposito tiene la bici3, 2, 1 y 4 en ese ordensi se hizo la luz"{
+    deposito.bicicletas().clear()
+    deposito.bicicletas().add(bici3)
+    deposito.bicicletas().add(bici2)
+    deposito.bicicletas().add(bici1)
+    deposito.bicicletas().add(bici4)
+    assert.that(deposito.seHizoLaLuz())
   }
 }

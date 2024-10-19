@@ -1,3 +1,4 @@
+import bicicleta.*
 class Deposito{
   const property bicicletas
 
@@ -37,5 +38,18 @@ class Deposito{
 
     return listaParejas
   } 
+
+  method seHizoLaLuz(){
+    const listaAuxiliar = bicicletas
+    var fueVistaLaPrimeraConLuz = false
+    bicicletas.forEach({bicicleta => 
+      if(not bicicleta.tieneLuz() and not fueVistaLaPrimeraConLuz)
+        listaAuxiliar.remove(listaAuxiliar.first())
+      else
+        fueVistaLaPrimeraConLuz = true
+      })
+
+    return listaAuxiliar.all({bicicleta => bicicleta.tieneLuz()})
+  }
 
 }
