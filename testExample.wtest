@@ -137,3 +137,53 @@ describe "group of tests for deposito PARTE 4" {
     assert.equals([],deposito.bicisCompanierasDe(bici1))
   }
 }
+
+describe "group of tests for deposito PARTE 6" {
+  //Bicicletas
+  const bici1 = new Bicicleta (rodado = 28, largo = 150, marca = "Olmo", accesorios = [farolito])
+  const bici2 = new Bicicleta (rodado = 26, largo = 110, marca = "Legnano", accesorios = [farolito, canasto1, morral1])
+  const bici3 = new Bicicleta (rodado = 20, largo = 90, marca = "Legnano", accesorios = [morral2])
+  const bici4 = new Bicicleta(rodado = 28, largo = 140, marca = "Olmo", accesorios = [farolito])
+  const bici5 = new Bicicleta (rodado = 26, largo = 100, marca = "Legnano", accesorios = [farolito])
+  const bici6 = new Bicicleta (rodado = 26, largo = 160, marca = "Olmo", accesorios = [farolito])
+  
+  //Accesorios
+  const canasto1 = new Canasto (volumen = 8)
+  const morral1 = new Morral (largo = 21, tieneOjoDeGato = true)
+  const morral2 = new Morral (largo = 6, tieneOjoDeGato = false)
+  
+  //Deposito
+  const deposito = new Deposito (bicicletas = [bici1,bici2,bici3])
+
+
+  test "no hay bicis compañeras" {
+    assert.notThat(deposito.hayCompanieras())
+  }
+
+  test "hay bicis compañeras si se agrega la bici4" {
+    deposito.bicicletas().add(bici4)
+    assert.that(deposito.hayCompanieras())
+  }
+
+  test "hay un par de companieras que son la bici1 y la bici4" {
+    deposito.bicicletas().add(bici4)
+    assert.equals([[bici1,bici4]],deposito.parejasDeCompanieras())
+  
+  }
+
+  test "hay 3 pares de parejas si agregamos la bici 4, 5 y 6"{
+    deposito.bicicletas().add(bici4)
+    deposito.bicicletas().add(bici5)
+    assert.equals([[bici1,bici4],[bici2,bici5],[bici3,bici5]],deposito.parejasDeCompanieras())
+  }
+
+  test "hay 4 pares de parejas si agregamos la bici 4, 5 y 6"{
+    deposito.bicicletas().add(bici4)
+    deposito.bicicletas().add(bici5)
+    deposito.bicicletas().add(bici6)
+    assert.equals([[bici1,bici4],[bici2,bici5],[bici3,bici5],[bici6,bici1]],deposito.parejasDeCompanieras())
+    assert.equals([bici4,bici6],deposito.bicisCompanierasDe(bici1))
+    assert.equals([bici5],deposito.bicisCompanierasDe(bici2))
+    assert.equals([bici5],deposito.bicisCompanierasDe(bici3))
+  }
+}

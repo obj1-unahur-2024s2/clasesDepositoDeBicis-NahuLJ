@@ -24,4 +24,18 @@ class Deposito{
 
   method sonCompanieras(unaBici, otraBici) = 
     unaBici.marca() == otraBici.marca() and (unaBici.largo() - otraBici.largo()).abs() <= 10
+  
+  method hayCompanieras() = bicicletas.any({bicicleta => not self.bicisCompanierasDe(bicicleta).isEmpty()})
+
+  method parejasDeCompanieras(){
+    const listaParejas = []
+    bicicletas.forEach({bicicleta => 
+      if (not self.bicisCompanierasDe(bicicleta).isEmpty() and 
+      not listaParejas.contains([self.bicisCompanierasDe(bicicleta).first(), bicicleta])) 
+          listaParejas.add([bicicleta, self.bicisCompanierasDe(bicicleta).first()])
+      })
+
+    return listaParejas
+  } 
+
 }
