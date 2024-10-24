@@ -40,7 +40,7 @@ class Deposito{
   } 
 
   method seHizoLaLuz(){
-    const listaAuxiliar = bicicletas
+    const listaAuxiliar = [] + bicicletas
     var fueVistaLaPrimeraConLuz = false
     bicicletas.forEach({bicicleta => 
       if(not bicicleta.tieneLuz() and not fueVistaLaPrimeraConLuz)
